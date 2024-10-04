@@ -1,0 +1,125 @@
+{% extends 'base.html' %} 
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">
+    Reviews for {% if movie_title %}{{ movie_title }}{% else %}All Movies{% endif %}
+  </h2>
+
+  <!-- Search, Sort, and Rating Filter Bar -->
+<form method="GET" action="{% url 'review-list' %}" class="mb-4">
+  <div class="input-group">
+    <input
+      type="text"
+      name="search"
+      class="form-control"
+      placeholder="Search reviews..."
+      value="{{ search_query }}"
+    />
+    <div>
+      <button class="btn btn-primary" style="margin-left: 10px" type="submit">Search</button>
+    </div>
+  </div>
+
+  <div class="mt-3 row">
+    <!-- Sort by dropdown -->
+    <div class="col-md-4">
+      <label for="sort">Sort by:</label>
+      <select id="sort" name="sort" class="form-select" onchange="this.form.submit()">
+        <option value="created_date_desc" {% if sort_by == 'created_date_desc' %}selected{% endif %}>Newest Review Date</option>
+        <option value="created_date_asc" {% if sort_by == 'created_date_asc' %}selected{% endif %}>Oldest Review Date</option>
+        <option value="rating" {% if sort_by == 'rating' %}selected{% endif %}>Rating</option>
+      </select>
+    </div>
+
+    <!-- Rating filter dropdown -->
+    <div class="col-md-4">
+      <label for="rating">Filter by Rating:</label>
+      <select id="rating" name="rating" class="form-select" onchange="this.form.submit()">
+        <option value="">All Ratings</option>
+        <option value="4-5" {% if rating_filter == '4-5' %}selected{% endif %}>4-5 Stars</option>
+        <option value="3-4" {% if rating_filter == '3-4' %}selected{% endif %}>3-4 Stars</option>
+        <option value="2-3" {% if rating_filter == '2-3' %}selected{% endif %}>2-3 Stars</option>
+      </select>
+    </div>
+  </div>
+</form>
+
+
+  <!-- Reviews List -->
+  {% if reviews %}
+  <div class="row">
+    {% for review in reviews %}
+    <div class="col-md-6 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex align-items-center mb-3">
+            <img
+              src="{{ review.poster_url }}"
+              alt="{{ review.movie_title }} Poster"
+              style="width: 100px; height: auto; object-fit: cover"
+              class="me-3"
+            />
+            <div>
+              <h5 class="card-title mb-1">{{ review.movie_title }}</h5>
+              <div class="text-warning mb-2">
+                <!-- Displaying Star Ratings -->
+                {% for star in "12345" %} {% if star|add:0 <= review.rating %}
+                <i class="fas fa-star"></i>
+                {% else %}
+                <i class="far fa-star"></i>
+                {% endif %} {% endfor %}
+              </div>
+              <p><strong>Rating:</strong> {{ review.rating }}/5</p>
+            </div>
+          </div>
+          <h6 class="card-subtitle mb-2">Review:</h6>
+          <p>{{ review.review_content }}</p>
+          <p class="text-muted">
+            Reviewed by {{ review.user.username }} on {{ review.created_date }}
+          </p>
+          <a
+            href="{% url 'review-detail' review.pk %}"
+            class="btn btn-primary mt-auto"
+          >
+            View Details
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Pagination controls -->
+  {% if reviews.has_other_pages %}
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+      {% if reviews.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?movie_title={{ movie_title }}&search={{ search_query }}&sort={{ sort_by }}&rating={{ rating_filter }}&page=1">First</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?movie_title={{ movie_title }}&search={{ search_query }}&sort={{ sort_by }}&rating={{ rating_filter }}&page={{ reviews.previous_page_number }}">Previous</a>
+      </li>
+      {% endif %}
+      {% for num in reviews.paginator.page_range %}
+      <li class="page-item {% if reviews.number == num %}active{% endif %}">
+        <a class="page-link" href="?movie_title={{ movie_title }}&search={{ search_query }}&sort={{ sort_by }}&rating={{ rating_filter }}&page={{ num }}">{{ num }}</a>
+      </li>
+      {% endfor %}
+      {% if reviews.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?movie_title={{ movie_title }}&search={{ search_query }}&sort={{ sort_by }}&rating={{ rating_filter }}&page={{ reviews.next_page_number }}">Next</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="?movie_title={{ movie_title }}&search={{ search_query }}&sort={{ sort_by }}&rating={{ rating_filter }}&page={{ reviews.paginator.num_pages }}">Last</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
+
+  {% else %}
+  <p>No reviews found for this movie.</p>
+  {% endif %}
+</div>
+{% endblock %}
