@@ -46,8 +46,6 @@ To get started with the Movie Review API, follow these steps to set up the proje
    cd Movie_Review_API
    ```
 
-````
-
 2. **Create a virtual environment**:
 
    ```bash
