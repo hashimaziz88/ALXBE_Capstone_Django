@@ -127,7 +127,7 @@ Contributions are welcome! If you'd like to contribute, please fork the reposito
 
 ### License
 
-This project is free to use and belongs to Hashim Aziz Muhammad, contact hashimazizm@gmail.com fr usage details.
+This project is free to use and belongs to Hashim Aziz Muhammad, contact hashimazizm@gmail.com for usage details.
 
 ### Acknowledgements
 
@@ -135,5 +135,3 @@ This project is free to use and belongs to Hashim Aziz Muhammad, contact hashima
 - [Django REST Framework](https://www.django-rest-framework.org/) - For building the API
 - [PostgreSQL](https://www.postgresql.org/) - Database system
 - [Docker](https://www.docker.com/) - For containerization
-
-````
