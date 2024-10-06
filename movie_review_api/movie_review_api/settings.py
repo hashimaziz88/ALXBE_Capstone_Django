@@ -5,8 +5,8 @@ from datetime import timedelta
 from dotenv import load_dotenv
 
 LOGOUT_REDIRECT_URL = 'home'
-LOGIN_URL = 'login'  # Change to your login URL name
 
+LOGIN_URL = 'login'  # Change to your login URL name
 
 load_dotenv()
 
@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-)v(m(d#zm^9%4o%m9sa1t!zln1!ynh-&)82@ulc5yb%(@6_3kq"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["hashimaziz88.pythonanywhere.com"]
+ALLOWED_HOSTS = ["hashimaziz88.pythonanywhere.com", "127.0.0.1"]
 
 
 INSTALLED_APPS = [
