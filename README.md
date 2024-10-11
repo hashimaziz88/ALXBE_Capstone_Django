@@ -69,15 +69,7 @@ To get started with the Movie Review API, follow these steps to set up the proje
    pip install -r requirements.txt
    ```
 
-5. **Set up the database**:
-
-   - Create a PostgreSQL database and user, and update the `DATABASES` setting in `settings.py` accordingly.
-   - Run migrations:
-     ```bash
-     python manage.py migrate
-     ```
-
-6. **Create a superuser** (optional for admin access):
+5. **Create a superuser** (optional for admin access):
    ```bash
    python manage.py createsuperuser
    ```
