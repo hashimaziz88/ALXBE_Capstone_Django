@@ -133,5 +133,6 @@ This project is free to use and belongs to Hashim Aziz Muhammad, contact hashima
 
 - [Django](https://www.djangoproject.com/) - The web framework used
 - [Django REST Framework](https://www.django-rest-framework.org/) - For building the API
-- [PostgreSQL](https://www.postgresql.org/) - Database system
-- [Docker](https://www.docker.com/) - For containerization
+- [SQLite](https://www.sqlite.org/index.html) - Database system
+- [PythonAnywhere](https://www.pythonanywhere.com/) - For hosting and deployment
+
