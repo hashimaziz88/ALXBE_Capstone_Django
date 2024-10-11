@@ -29,7 +29,7 @@ Welcome to the **Movie Review API**! This Django-based API allows users to manag
 
 - **Django**: Web framework for building the API
 - **Django REST Framework**: Toolkit for building Web APIs
-- **PostgreSQL**: Database for storing user data and reviews
+- **SQLite**: Database for storing user data and reviews
 - **Django Allauth**: Authentication for user registration and login
 - **PythonAnywhere**: For Deployment purposes
 - **Git**: Version control for the project code
